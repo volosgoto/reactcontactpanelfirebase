@@ -1,24 +1,20 @@
 // see more https://github.com/prescottprue/react-redux-firebase
 // Firebase using Firestore
 
+import "./config/db_config";
 import { createStore, combineReducers, compose } from "redux";
 import firebase from "firebase";
 // import firebase from "firebase/app";
 import "firebase/firestore";
 import { reactReduxFirebase, firebaseReducer } from "react-redux-firebase";
 import { reduxFirestore, firestoreReducer } from "redux-firestore";
+import db_config from "./config/db_config";
 
 // Recucers
 // import rootReducer from "./reducers";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyAoU2KcDeb2z9ylr_bVH1SxQiNKlG7wzpg",
-  authDomain: "reactclientpanel-c8995.firebaseapp.com",
-  databaseURL: "https://reactclientpanel-c8995.firebaseio.com",
-  projectId: "reactclientpanel-c8995",
-  storageBucket: "reactclientpanel-c8995.appspot.com",
-  messagingSenderId: "448244676673"
-};
+// DB Configuration
+const firebaseConfig = db_config;
 
 // react-redux-firebase config
 const rrfConfig = {

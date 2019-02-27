@@ -8,6 +8,11 @@
 # testing
 /coverage
 
+
+# db config
+/config/db_config.js
+
+
 # production
 /build
 
