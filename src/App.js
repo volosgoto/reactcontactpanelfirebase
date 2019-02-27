@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import AppNavbar from "./components/layout/AppNavbar";
 import Dashboard from "./components/layout/Dashboard";
+import AddClient from "./components/clients/AddClient";
+import PageNotFound from "./components/layout/PageNotFound";
 
 // Set redux
 import store from "./store";
@@ -18,7 +20,9 @@ class App extends Component {
             <AppNavbar />
             <div className="container">
               <Switch>
-                <Route exact to="/" component={Dashboard} />
+                <Route exact path="/" component={Dashboard} />
+                <Route exact path="/client/add" component={AddClient} />
+                <Route component={PageNotFound} />
               </Switch>
             </div>
           </div>
