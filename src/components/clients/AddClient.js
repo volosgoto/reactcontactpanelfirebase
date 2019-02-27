@@ -2,15 +2,20 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
 class AddClient extends Component {
-  render() {
-    state = {
-      firstName: "",
-      lastName: "",
-      email: "",
-      phone: "",
-      balance: ""
-    };
+  state = {
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    balance: ""
+  };
 
+  onChange = e => {
+    this.setState({
+      [e.target.name]: [e.target.value]
+    });
+  };
+  render() {
     return (
       <div>
         <div className="row">
@@ -34,6 +39,18 @@ class AddClient extends Component {
                   required
                   onChange={this.onChange}
                   value={this.state.firstName}
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="lastName">Last Name</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  name="lastName"
+                  minLength="2"
+                  required
+                  onChange={this.onChange}
+                  value={this.state.lastName}
                 />
               </div>
             </form>
