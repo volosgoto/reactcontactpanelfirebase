@@ -1,6 +1,11 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
+import PropTypes from "prop-types";
+// import { compose } from "redux";
+// import { connect } from "react-redux";
+import { firestoreConnect } from "react-redux-firebase";
+
 class AddClient extends Component {
   state = {
     firstName: "",
@@ -15,7 +20,25 @@ class AddClient extends Component {
       [e.target.name]: [e.target.value]
     });
   };
+
+  onSubmit = e => {
+    e.preventDefault();
+    const newClient = this.state;
+
+    if (newClient.balance === "") {
+      newClient.balance = 0;
+    }
+
+    const { firestore } = this.props;
+
+    firestore.add({ collection: "clients" }, newClient).then(() => {
+      this.props.history.push("/"); // redirecting to homepage
+    });
+  };
+
   render() {
+    console.log(this.props);
+
     return (
       <div>
         <div className="row">
@@ -28,7 +51,7 @@ class AddClient extends Component {
         <div className="card">
           <div className="card-header">Add Client</div>
           <div className="card-body">
-            <form action="">
+            <form onSubmit={this.onSubmit}>
               <div className="form-group">
                 <label htmlFor="firstName">First Name</label>
                 <input
@@ -69,7 +92,7 @@ class AddClient extends Component {
                   type="text"
                   className="form-control"
                   name="phone"
-                  minLength="10"
+                  minLength="7"
                   required
                   onChange={this.onChange}
                   value={this.state.phone}
@@ -98,4 +121,8 @@ class AddClient extends Component {
   }
 }
 
-export default AddClient;
+AddClient.propTypes = {
+  firestore: PropTypes.object.isRequired
+};
+
+export default firestoreConnect()(AddClient);
