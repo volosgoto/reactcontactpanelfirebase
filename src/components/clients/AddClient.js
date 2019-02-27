@@ -3,6 +3,14 @@ import { Link } from "react-router-dom";
 
 class AddClient extends Component {
   render() {
+    state = {
+      firstName: "",
+      lastName: "",
+      email: "",
+      phone: "",
+      balance: ""
+    };
+
     return (
       <div>
         <div className="row">
@@ -22,10 +30,10 @@ class AddClient extends Component {
                   type="text"
                   className="form-control"
                   name="firstName"
-                  // minLength="2"
-                  // required
-                  // onChange={this.onChange}
-                  // value={this.state.firstName}
+                  minLength="2"
+                  required
+                  onChange={this.onChange}
+                  value={this.state.firstName}
                 />
               </div>
             </form>
