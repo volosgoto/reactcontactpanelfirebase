@@ -15,6 +15,14 @@ class ClientDetails extends Component {
     balanceUpdateAmount: ""
   };
 
+  // Update form
+  balanceSubmit = e => {
+    e.preventDefault();
+    console.log(this.state.balanceUpdateAmount);
+  };
+
+  onChange = e => this.setState({ [e.target.name]: e.target.value });
+
   onDeleteClick = () => {
     console.log("onDeleteClick");
   };
@@ -26,25 +34,27 @@ class ClientDetails extends Component {
     let balanceForm = "";
     // Disp Balance form
     if (showBalanceUpdate) {
-      <form>
-        <div className="input-group">
-          <input
-            type="text"
-            className="form-control"
-            name="balanceUpdateAmount"
-            placeholder="Add New Balance"
-            value={balanceUpdateAmount}
-            onChange={this.onChange}
-          />
-          <div className="input-group-append">
+      balanceForm = (
+        <form onSubmit={this.balanceSubmit}>
+          <div className="input-group">
             <input
-              type="submit"
-              value="Update"
-              className="btn btn-outline-dark"
+              type="text"
+              className="form-control"
+              name="balanceUpdateAmount"
+              placeholder="Add New Balance"
+              value={balanceUpdateAmount}
+              onChange={this.onChange}
             />
+            <div className="input-group-append">
+              <input
+                type="submit"
+                value="Update"
+                className="btn btn-outline-dark"
+              />
+            </div>
           </div>
-        </div>
-      </form>;
+        </form>
+      );
     } else {
       balanceForm = null;
     }
@@ -107,7 +117,7 @@ class ClientDetails extends Component {
                       </a>
                     </small>
                   </h3>
-                  {/* {balanceForm} */}
+                  {balanceForm}
                 </div>
               </div>
 
