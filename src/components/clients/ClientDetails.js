@@ -32,8 +32,13 @@ class ClientDetails extends Component {
 
   onChange = e => this.setState({ [e.target.name]: e.target.value });
 
+  // Delete client
   onDeleteClick = () => {
-    console.log("onDeleteClick");
+    const { client, firestore, history } = this.props;
+
+    firestore
+      .delete({ collection: "clients", doc: client.id })
+      .then(history.push("/"));
   };
 
   render() {
