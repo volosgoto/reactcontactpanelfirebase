@@ -18,7 +18,16 @@ class ClientDetails extends Component {
   // Update form
   balanceSubmit = e => {
     e.preventDefault();
-    console.log(this.state.balanceUpdateAmount);
+
+    const { client, firestore } = this.props;
+    const { balanceUpdateAmount } = this.state;
+
+    const clientUpdate = {
+      balance: parseFloat(balanceUpdateAmount)
+    };
+
+    // Update in firestore
+    firestore.update({ collection: "clients", doc: client.id }, clientUpdate);
   };
 
   onChange = e => this.setState({ [e.target.name]: e.target.value });

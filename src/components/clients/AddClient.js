@@ -31,6 +31,7 @@ class AddClient extends Component {
 
     const { firestore } = this.props;
 
+    // Add client to firestore
     firestore.add({ collection: "clients" }, newClient).then(() => {
       this.props.history.push("/"); // redirecting to homepage
     });
