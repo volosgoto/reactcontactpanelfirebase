@@ -7,14 +7,47 @@ import classnames from "classnames";
 
 import PropTypes from "prop-types";
 import Spinner from "../layout/Spinner";
+import { format } from "path";
 
 class ClientDetails extends Component {
+  state = {
+    showBalanceUpdate: false,
+    balanceUpdateAmount: ""
+  };
+
   onDeleteClick = () => {
     console.log("onDeleteClick");
   };
 
   render() {
     const { client } = this.props;
+    const { showBalanceUpdate, balanceUpdateAmount } = this.state;
+
+    let balanceForm = "";
+    // Disp Balance form
+    if (showBalanceUpdate) {
+      <form>
+        <div className="input-group">
+          <input
+            type="text"
+            className="form-control"
+            name="balanceUpdateAmount"
+            placeholder="Add New Balance"
+            value={balanceUpdateAmount}
+            onChange={this.onChange}
+          />
+          <div className="input-group-append">
+            <input
+              type="submit"
+              value="Update"
+              className="btn btn-outline-dark"
+            />
+          </div>
+        </div>
+      </form>;
+    } else {
+      balanceForm = null;
+    }
 
     if (client) {
       return (
@@ -59,7 +92,8 @@ class ClientDetails extends Component {
                       })}
                     >
                       ${parseFloat(client.balance).toFixed(2)}
-                    </span>{" "}
+                    </span>
+                    {"  "}
                     <small>
                       <a
                         href="#!"
