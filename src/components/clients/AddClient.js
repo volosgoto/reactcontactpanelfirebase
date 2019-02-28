@@ -38,8 +38,6 @@ class AddClient extends Component {
   };
 
   render() {
-    console.log(this.props);
-
     return (
       <div>
         <div className="row">
