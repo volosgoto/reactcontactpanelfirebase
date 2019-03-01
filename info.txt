@@ -1,6 +1,11 @@
 Install react-router-dom
 sudo yarn add react-router-dom
 
+
 Setup redux and firebase (uses cloud firestore)
 sudo yarn add redux react-redux react-redux-firebase redux-firestore
 sudo yarn add redux firebase
+
+
+Setup auth wrapper
+sudo yarn add redux-auth-wrapper
