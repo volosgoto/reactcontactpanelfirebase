@@ -10,6 +10,21 @@ class Login extends Component {
     password: ""
   };
 
+  onSubmit = e => {
+    e.preventDefault();
+
+    const { firebase, notifyUser } = this.props;
+    const { email, password } = this.state;
+
+    firebase
+      .login({
+        email,
+        password
+      })
+      .catch(err => alert("Invalid Login or password"));
+  };
+  onChange = e => this.setState({ [e.target.name]: e.target.value });
+
   render() {
     return (
       <div className="row">
