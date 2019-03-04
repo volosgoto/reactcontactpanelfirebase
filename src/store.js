@@ -14,6 +14,7 @@ import db_config from "./config/db_config";
 
 // Recucers
 import notifyReducer from "./reducers/notifyReducer";
+import settingsReducer from "./reducers/settingsReducer";
 
 // DB Configuration
 const firebaseConfig = db_config;
@@ -42,7 +43,8 @@ const createStoreWithFirebase = compose(
 const rootReducer = combineReducers({
   firebase: firebaseReducer,
   firestore: firestoreReducer,
-  notify: notifyReducer
+  notify: notifyReducer,
+  settings: settingsReducer
 });
 
 // Create store with reducers and initial state
