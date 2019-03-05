@@ -1,10 +1,12 @@
 {
   "name": "reactcontactpanelfirebase.loc",
+  "homepage": "https://volosgoto.github.io/reactcontactpanelfirebase/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "classnames": "^2.2.6",
     "firebase": "^5.8.4",
+    "gh-pages": "^2.0.1",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
     "react-redux": "^5.0.7",
