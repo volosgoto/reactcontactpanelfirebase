@@ -10,6 +10,7 @@ import AddClient from "./components/clients/AddClient";
 import ClientDetails from "./components/clients/ClientDetails";
 import EditClient from "./components/clients/EditClient";
 import Login from "./components/auth/Login";
+import Settings from "./components/settings/Settings";
 
 // Set redux
 import store from "./store";
@@ -48,6 +49,11 @@ class App extends Component {
                   exact
                   path="/login"
                   component={UserIsNotAuthenticated(Login)}
+                />
+                <Route
+                  exact
+                  path="/settings"
+                  component={UserIsAuthenticated(Settings)}
                 />
                 <Route component={PageNotFound} />
               </Switch>
