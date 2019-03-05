@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-
 import PropTypes from "prop-types";
-// import { compose } from "redux";
-// import { connect } from "react-redux";
+import { compose } from "redux";
+import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 
 class AddClient extends Component {
@@ -15,29 +14,28 @@ class AddClient extends Component {
     balance: ""
   };
 
-  onChange = e => {
-    this.setState({
-      [e.target.name]: [e.target.value]
-    });
-  };
-
   onSubmit = e => {
     e.preventDefault();
+
     const newClient = this.state;
 
+    const { firestore, history } = this.props;
+
+    // If no balance, make 0
     if (newClient.balance === "") {
       newClient.balance = 0;
     }
 
-    const { firestore } = this.props;
-
-    // Add client to firestore
-    firestore.add({ collection: "clients" }, newClient).then(() => {
-      this.props.history.push("/"); // redirecting to homepage
-    });
+    firestore
+      .add({ collection: "clients" }, newClient)
+      .then(() => history.push("/"));
   };
 
+  onChange = e => this.setState({ [e.target.name]: e.target.value });
+
   render() {
+    const { disableBalanceOnAdd } = this.props.settings;
+
     return (
       <div>
         <div className="row">
@@ -47,6 +45,7 @@ class AddClient extends Component {
             </Link>
           </div>
         </div>
+
         <div className="card">
           <div className="card-header">Add Client</div>
           <div className="card-body">
@@ -63,6 +62,7 @@ class AddClient extends Component {
                   value={this.state.firstName}
                 />
               </div>
+
               <div className="form-group">
                 <label htmlFor="lastName">Last Name</label>
                 <input
@@ -75,6 +75,7 @@ class AddClient extends Component {
                   value={this.state.lastName}
                 />
               </div>
+
               <div className="form-group">
                 <label htmlFor="email">Email</label>
                 <input
@@ -85,18 +86,20 @@ class AddClient extends Component {
                   value={this.state.email}
                 />
               </div>
+
               <div className="form-group">
                 <label htmlFor="phone">Phone</label>
                 <input
                   type="text"
                   className="form-control"
                   name="phone"
-                  minLength="7"
+                  minLength="10"
                   required
                   onChange={this.onChange}
                   value={this.state.phone}
                 />
               </div>
+
               <div className="form-group">
                 <label htmlFor="balance">Balance</label>
                 <input
@@ -105,8 +108,10 @@ class AddClient extends Component {
                   name="balance"
                   onChange={this.onChange}
                   value={this.state.balance}
+                  disabled={disableBalanceOnAdd}
                 />
               </div>
+
               <input
                 type="submit"
                 value="Submit"
@@ -121,7 +126,13 @@ class AddClient extends Component {
 }
 
 AddClient.propTypes = {
-  firestore: PropTypes.object.isRequired
+  firestore: PropTypes.object.isRequired,
+  settings: PropTypes.object.isRequired
 };
 
-export default firestoreConnect()(AddClient);
+export default compose(
+  firestoreConnect(),
+  connect((state, props) => ({
+    settings: state.settings
+  }))
+)(AddClient);
