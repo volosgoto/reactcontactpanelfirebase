@@ -10,7 +10,7 @@
 
 
 # db config
-/config
+/config/db_config.js
 
 
 # production
